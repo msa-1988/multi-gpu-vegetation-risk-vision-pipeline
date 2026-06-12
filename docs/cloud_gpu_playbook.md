@@ -41,7 +41,15 @@ Colab free GPU access is useful for single-GPU experimentation but is not guaran
 - notebook demos,
 - profiling smaller runs.
 
-Colab single-GPU command:
+Open the prepared notebook:
+
+```text
+https://colab.research.google.com/github/msa-1988/multi-gpu-vegetation-risk-vision-pipeline/blob/main/notebooks/colab_vepl_single_gpu.ipynb
+```
+
+The notebook clones the repo, checks CUDA, downloads VEPL, runs a fast 8-epoch real-data experiment, and can optionally run the 40-epoch README-style benchmark.
+
+Raw Colab single-GPU command:
 
 ```bash
 pip install -r requirements.txt

@@ -2,6 +2,8 @@
 
 Distributed computer-vision training pipeline for vegetation-risk segmentation around powerline corridors. The project demonstrates PyTorch `DistributedDataParallel`, mixed precision, reproducible metrics, real UAV dataset validation, and cloud-GPU portability while staying aligned with climate-tech and infrastructure-risk ML use cases.
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/msa-1988/multi-gpu-vegetation-risk-vision-pipeline/blob/main/notebooks/colab_vepl_single_gpu.ipynb)
+
 ![VEPL prediction grid](docs/assets/vepl_predictions_full.png)
 
 ## Results Snapshot
@@ -55,6 +57,16 @@ PYTHONPATH=src python scripts/visualize_vepl_predictions.py \
 ```
 
 ![VEPL training curves](docs/assets/vepl_training_curves.png)
+
+## Google Colab
+
+Use the Colab notebook for a clean single-GPU reproduction:
+
+```text
+notebooks/colab_vepl_single_gpu.ipynb
+```
+
+The notebook clones this repository, downloads VEPL, runs a fast 8-epoch CUDA check, generates prediction visuals, and includes an optional 40-epoch README-style run.
 
 ## Quick Start
 
