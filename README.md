@@ -68,6 +68,16 @@ notebooks/colab_vepl_single_gpu.ipynb
 
 The notebook clones this repository, downloads VEPL, runs a fast 8-epoch CUDA check, generates prediction visuals, and includes an optional 40-epoch README-style run.
 
+## Kaggle Multi-GPU
+
+Use the Kaggle notebook for the cloud DDP path:
+
+```text
+notebooks/kaggle_vepl_2gpu.ipynb
+```
+
+In Kaggle, select a 2-GPU accelerator such as `GPU T4 x2` when available and turn Internet on. The notebook launches `torchrun --nproc_per_node=2`, trains on VEPL, and writes rank-0 metrics under `artifacts/runs/kaggle_2gpu`.
+
 ## Quick Start
 
 ```bash

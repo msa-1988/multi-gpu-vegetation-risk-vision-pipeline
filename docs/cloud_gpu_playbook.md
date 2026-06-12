@@ -14,13 +14,25 @@ The code uses standard PyTorch `torchrun` and `DistributedDataParallel`, so the 
 
 Kaggle often provides GPU notebook options such as P100 or T4x2 depending on availability and quota.
 
+Use the prepared notebook:
+
+```text
+notebooks/kaggle_vepl_2gpu.ipynb
+```
+
+Recommended Kaggle settings:
+
+- Accelerator: `GPU T4 x2` or another 2-GPU option when available.
+- Internet: `On`.
+
 In a Kaggle notebook:
 
 ```bash
-git clone <your-repo-url>
-cd "07 - Multi-GPU Vegetation Risk Vision Pipeline"
-pip install -r requirements.txt
+git clone https://github.com/msa-1988/multi-gpu-vegetation-risk-vision-pipeline.git
+cd multi-gpu-vegetation-risk-vision-pipeline
+pip install -q numpy tqdm matplotlib
 export PYTHONPATH=src
+bash scripts/download_vepl_sample.sh
 bash scripts/run_kaggle_2gpu.sh
 python scripts/compare_runs.py
 ```
