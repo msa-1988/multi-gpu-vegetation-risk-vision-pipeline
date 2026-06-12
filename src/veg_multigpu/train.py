@@ -220,6 +220,7 @@ def train() -> None:
     scaler = torch.amp.GradScaler("cuda", enabled=args.amp and device.type == "cuda")
 
     history: list[dict[str, float | int]] = []
+    best_val_iou = -1.0
     global_start = time.perf_counter()
 
     for epoch in range(1, args.epochs + 1):
@@ -273,6 +274,10 @@ def train() -> None:
         history.append(row)
         if is_main:
             print(json.dumps(row, indent=2))
+            if row["val_iou"] > best_val_iou:
+                best_val_iou = float(row["val_iou"])
+                model_to_save = model.module if isinstance(model, DistributedDataParallel) else model
+                torch.save(model_to_save.state_dict(), args.out_dir / "best_model.pt")
 
     if is_main:
         total_time = time.perf_counter() - global_start
@@ -280,6 +285,7 @@ def train() -> None:
             "args": json_ready_args(args),
             "device": str(device),
             "world_size": world_size,
+            "best_val_iou": best_val_iou,
             "total_train_seconds": total_time,
             "history": history,
         }

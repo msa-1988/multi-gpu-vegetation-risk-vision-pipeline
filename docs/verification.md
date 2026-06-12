@@ -65,7 +65,7 @@ PYTHONPATH=src /home/useradmin/miniconda3/envs/localai/bin/python scripts/compar
 | localai_single_gpu | 1 | 0.8382 | 0.9120 | 758.4 |
 | localai_ddp_cpu_smoke | 2 | 0.0457 | 0.0868 | 117.5 |
 | vepl_localai_smoke | 1 | 0.6468 | 0.7849 | 507.8 |
-| vepl_localai_full | 1 | 0.7290 | 0.8392 | 249.1 |
+| vepl_localai_full | 1 | 0.7083 | 0.8253 | 178.4 |
 
 The single-GPU run is the main local quality run. The DDP CPU run is a sanity test for process groups, distributed samplers, rank-aware metric reduction, artifact writing, and run comparison. True multi-GPU CUDA speedup must be verified on a cloud runtime with at least two GPUs.
 
@@ -125,19 +125,27 @@ dataset: VEPL compact non-augmented tiles
 samples: 426 train / 106 validation
 image_size: 192
 base_channels: 32
-epochs: 15
+epochs: 40
 device: cuda:0
 ```
 
-Verified result:
+Verified best-checkpoint result:
 
 ```text
-best_val_iou: 0.7299 at epoch 11
-final_val_iou: 0.7290
-final_val_f1: 0.8392
-final_val_accuracy: 0.8270
-images_per_sec: 249.1
-total_train_seconds: 30.48
+best_val_iou: 0.7592 at epoch 34
+best_val_f1: 0.8599
+best_val_accuracy: 0.8559
+images_per_sec_at_best: 175.7
+total_train_seconds: 90.82
+```
+
+Final epoch result:
+
+```text
+final_val_iou: 0.7083
+final_val_f1: 0.8253
+final_val_accuracy: 0.8366
+images_per_sec: 178.4
 ```
 
 Commit-ready visual outputs:

@@ -8,7 +8,7 @@ PYTHONPATH=src "$LOCALAI_PYTHON" -m veg_multigpu.train \
   --dataset vepl \
   --data-dir "$DATA_DIR" \
   --vepl-target foreground \
-  --epochs 15 \
+  --epochs 40 \
   --batch-size 8 \
   --image-size 192 \
   --train-samples 426 \

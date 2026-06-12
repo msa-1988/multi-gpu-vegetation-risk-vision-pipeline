@@ -6,11 +6,11 @@ Distributed computer-vision training pipeline for vegetation-risk segmentation a
 
 ## Results Snapshot
 
-| dataset | images | resolution | epochs | device | best IoU | final IoU | final F1 | throughput |
+| dataset | images | resolution | epochs | device | best epoch | best IoU | best F1 | throughput |
 |---|---:|---:|---:|---|---:|---:|---:|---:|
-| VEPL UAV tiles | 532 | 192px | 15 | RTX 5070 Laptop GPU | 0.7299 | 0.7290 | 0.8392 | 249.1 img/s |
+| VEPL UAV tiles | 532 | 192px | 40 | RTX 5070 Laptop GPU | 34 | 0.7592 | 0.8599 | 175.7 img/s |
 
-The representative run trains on the compact VEPL UAV tile archive with 426 training samples and 106 validation samples. The model learns a binary foreground mask over vegetation plus powerline/corridor pixels decoded from VEPL's semantic colors.
+The representative run trains on the compact VEPL UAV tile archive with 426 training samples and 106 validation samples. The model learns a binary foreground mask over vegetation plus powerline/corridor pixels decoded from VEPL's semantic colors, then saves the best checkpoint by validation IoU.
 
 ## Core Idea
 
@@ -47,7 +47,7 @@ bash scripts/download_vepl_sample.sh
 bash scripts/run_vepl_localai_full.sh
 PYTHONPATH=src python scripts/plot_training_curves.py
 PYTHONPATH=src python scripts/visualize_vepl_predictions.py \
-  --checkpoint artifacts/runs/vepl_localai_full/model.pt \
+  --checkpoint artifacts/runs/vepl_localai_full/best_model.pt \
   --output docs/assets/vepl_predictions_full.png \
   --image-size 192 \
   --base-channels 32 \
@@ -111,10 +111,10 @@ This uses the same U-Net, AMP, metrics, and artifact layout as the synthetic exp
 Verified representative VEPL result on `localai`:
 
 ```text
-best_val_iou: 0.7299
-final_val_iou: 0.7290
-final_val_f1: 0.8392
-images_per_sec: 249.1
+best_epoch: 34
+best_val_iou: 0.7592
+best_val_f1: 0.8599
+images_per_sec_at_best: 175.7
 ```
 
 Visual outputs:
